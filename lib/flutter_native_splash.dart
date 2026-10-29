@@ -4,7 +4,7 @@
 /// Web-native code for customizing this native splash screen background color
 /// and splash image. Supports dark mode, full screen, and platform-specific
 /// options.
-library flutter_native_splash;
+library;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
@@ -51,6 +51,7 @@ class FlutterNativeSplash {
     if (kIsWeb) {
       // Use SchedulerBinding to avoid white flash on splash removal.
       SchedulerBinding.instance.addPostFrameCallback((_) {
+        // TODO: just call removeSplashFromWeb() instead - potentially breaking!
         try {
           _channel.invokeMethod('remove');
         } catch (e) {

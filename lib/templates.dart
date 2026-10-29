@@ -9,7 +9,7 @@ const String _androidLaunchItemXml = '''
 ''';
 
 const String _androidBrandingItemXml = '''
-    <item>
+    <item android:bottom="{bottom_padding}dp">
         <bitmap android:gravity="center" android:src="@drawable/branding" />
     </item>
 ''';
@@ -88,7 +88,7 @@ const String _androidV31StylesXml = '''
 const String _androidV31StylesNightXml = '''
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
+    <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is on -->
     <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowSplashScreenBackground">@drawable/launch_background</item>
     </style>
@@ -386,21 +386,21 @@ const String _iOSLaunchBackgroundConstraints = '''
 const String _iOSBrandingCenterBottomConstraints = '''
 <constraints>
   <constraint firstItem="Uyq-Kz-ftE" firstAttribute="centerX" secondItem="YRO-k0-Ey4" secondAttribute="centerX" id="3kg-TC-cPP"/>
-  <constraint firstAttribute="bottom" secondItem="Uyq-Kz-ftE" secondAttribute="bottom"  id="8Yb-q4-8bl"/>
+  <constraint firstAttribute="bottom" secondItem="Uyq-Kz-ftE" secondAttribute="bottom" constant="{bottom_padding}" id="8Yb-q4-8bl"/>
 </constraints>
 ''';
 
 const String _iOSBrandingLeftBottomConstraints = '''
 <constraints>
   <constraint firstAttribute="leading" secondItem="Uyq-Kz-ftE" secondAttribute="leading" id="3kg-TC-cPP"/>
-  <constraint firstAttribute="bottom" secondItem="Uyq-Kz-ftE" secondAttribute="bottom" id="8Yb-q4-8bl"/>
+  <constraint firstAttribute="bottom" secondItem="Uyq-Kz-ftE" secondAttribute="bottom" constant="{bottom_padding}" id="8Yb-q4-8bl"/>
 </constraints>
 ''';
 
 const String _iOSBrandingRightBottomConstraints = '''
 <constraints>
   <constraint firstAttribute="trailing" secondItem="Uyq-Kz-ftE" secondAttribute="trailing" id="3kg-TC-cPP"/>                            
-  <constraint firstAttribute="bottom" secondItem="Uyq-Kz-ftE" secondAttribute="bottom" id="8Yb-q4-8lb"/>                            
+  <constraint firstAttribute="bottom" secondItem="Uyq-Kz-ftE" secondAttribute="bottom" constant="{bottom_padding}" id="8Yb-q4-8lb"/>                            
 </constraints>
 ''';
 

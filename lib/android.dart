@@ -56,6 +56,7 @@ void _createAndroidSplash({
   required String? android12BackgroundColor,
   required String? android12DarkBackgroundColor,
   required String? brandingImagePath,
+  required String? brandingBottomPadding,
   required String? brandingDarkImagePath,
   required String? color,
   required String? darkColor,
@@ -69,7 +70,33 @@ void _createAndroidSplash({
   required String? screenOrientation,
   String? android12BrandingImagePath,
   String? android12DarkBrandingImagePath,
+  int? androidMinSdk,
 }) {
+  androidMinSdk ??= 16;
+  final androidDrawableFolder =
+      _flavorHelper.getAndroidDrawableFolder(androidMinSdk);
+  final androidNightDrawableFolder =
+      _flavorHelper.getAndroidNightDrawableFolder(androidMinSdk);
+  final androidLaunchBackgroundFile =
+      _flavorHelper.getAndroidLaunchBackgroundFile(androidMinSdk);
+  final androidLaunchDarkBackgroundFile =
+      _flavorHelper.getAndroidLaunchDarkBackgroundFile(androidMinSdk);
+  final androidStylesFile = _flavorHelper.getAndroidStylesFile(androidMinSdk);
+  final androidNightStylesFile =
+      _flavorHelper.getAndroidNightStylesFile(androidMinSdk);
+  final androidV31StylesFile =
+      _flavorHelper.getAndroidV31StylesFile(androidMinSdk);
+  final androidV31NightStylesFile =
+      _flavorHelper.getAndroidV31NightStylesFile(androidMinSdk);
+  final androidV21DrawableFolder =
+      _flavorHelper.getAndroidV21DrawableFolder(androidMinSdk);
+  final androidV21LaunchBackgroundFile =
+      _flavorHelper.getAndroidV21LaunchBackgroundFile(androidMinSdk);
+  final androidV21NightDrawableFolder =
+      _flavorHelper.getAndroidV21NightDrawableFolder(androidMinSdk);
+  final androidV21LaunchDarkBackgroundFile =
+      _flavorHelper.getAndroidV21LaunchDarkBackgroundFile(androidMinSdk);
+
   _applyImageAndroid(imagePath: imagePath);
 
   _applyImageAndroid(imagePath: darkImagePath, dark: true);
@@ -108,100 +135,121 @@ void _createAndroidSplash({
     fileName: 'android12branding.png',
   );
 
-  _createBackground(
-    colorString: color,
-    darkColorString: darkColor,
-    darkBackgroundImageSource: darkBackgroundImage,
-    backgroundImageSource: backgroundImage,
-    darkBackgroundImageDestination:
-        '${_flavorHelper.androidNightDrawableFolder}background.png',
-    backgroundImageDestination:
-        '${_flavorHelper.androidDrawableFolder}background.png',
-  );
-
-  _createBackground(
-    colorString: color,
-    darkColorString: darkColor,
-    darkBackgroundImageSource: darkBackgroundImage,
-    backgroundImageSource: backgroundImage,
-    darkBackgroundImageDestination:
-        '${_flavorHelper.androidNightV21DrawableFolder}background.png',
-    backgroundImageDestination:
-        '${_flavorHelper.androidV21DrawableFolder}background.png',
-  );
-
-  print('[Android] Updating launch background(s) with splash image path...');
-
-  _applyLaunchBackgroundXml(
-    gravity: gravity,
-    launchBackgroundFilePath: _flavorHelper.androidLaunchBackgroundFile,
-    showImage: imagePath != null,
-    showBranding: brandingImagePath != null,
-    brandingGravity: brandingGravity,
-  );
-
-  if (darkColor != null || darkBackgroundImage != null) {
-    _applyLaunchBackgroundXml(
-      gravity: gravity,
-      launchBackgroundFilePath: _flavorHelper.androidLaunchDarkBackgroundFile,
-      showImage: imagePath != null,
-      showBranding: brandingImagePath != null,
-      brandingGravity: brandingGravity,
+  if (androidNightDrawableFolder != null && androidDrawableFolder != null) {
+    _createBackground(
+      colorString: color,
+      darkColorString: darkColor,
+      darkBackgroundImageSource: darkBackgroundImage,
+      backgroundImageSource: backgroundImage,
+      darkBackgroundImageDestination:
+          '${androidNightDrawableFolder}background.png',
+      backgroundImageDestination: '${androidDrawableFolder}background.png',
     );
   }
 
-  if (Directory(_flavorHelper.androidV21DrawableFolder).existsSync()) {
+  if (androidV21NightDrawableFolder != null &&
+      androidV21DrawableFolder != null) {
+    _createBackground(
+      colorString: color,
+      darkColorString: darkColor,
+      darkBackgroundImageSource: darkBackgroundImage,
+      backgroundImageSource: backgroundImage,
+      darkBackgroundImageDestination:
+          '${androidV21NightDrawableFolder}background.png',
+      backgroundImageDestination: '${androidV21DrawableFolder}background.png',
+    );
+  }
+
+  // ignore_for_file: avoid_print
+  print('[Android] Updating launch background(s) with splash image path...');
+
+  if (androidLaunchBackgroundFile != null) {
     _applyLaunchBackgroundXml(
       gravity: gravity,
-      launchBackgroundFilePath: _flavorHelper.androidV21LaunchBackgroundFile,
+      launchBackgroundFilePath: androidLaunchBackgroundFile,
       showImage: imagePath != null,
       showBranding: brandingImagePath != null,
       brandingGravity: brandingGravity,
+      brandingBottomPadding: brandingBottomPadding,
     );
-    if (darkColor != null || darkBackgroundImage != null) {
+  }
+
+  if (androidLaunchDarkBackgroundFile != null &&
+      (darkColor != null || darkBackgroundImage != null)) {
+    _applyLaunchBackgroundXml(
+      gravity: gravity,
+      launchBackgroundFilePath: androidLaunchDarkBackgroundFile,
+      showImage: imagePath != null,
+      showBranding: brandingImagePath != null,
+      brandingGravity: brandingGravity,
+      brandingBottomPadding: brandingBottomPadding,
+    );
+  }
+
+  if (androidV21DrawableFolder != null &&
+      androidV21LaunchBackgroundFile != null &&
+      Directory(androidV21DrawableFolder).existsSync()) {
+    _applyLaunchBackgroundXml(
+      gravity: gravity,
+      launchBackgroundFilePath: androidV21LaunchBackgroundFile,
+      showImage: imagePath != null,
+      showBranding: brandingImagePath != null,
+      brandingGravity: brandingGravity,
+      brandingBottomPadding: brandingBottomPadding,
+    );
+    if (androidV21LaunchDarkBackgroundFile != null &&
+        (darkColor != null || darkBackgroundImage != null)) {
       _applyLaunchBackgroundXml(
         gravity: gravity,
-        launchBackgroundFilePath:
-            _flavorHelper.androidV21LaunchDarkBackgroundFile,
+        launchBackgroundFilePath: androidV21LaunchDarkBackgroundFile,
         showImage: imagePath != null,
         showBranding: brandingImagePath != null,
         brandingGravity: brandingGravity,
+        brandingBottomPadding: brandingBottomPadding,
       );
     }
   }
 
   print('[Android] Updating styles...');
-  _applyStylesXml(
-    fullScreen: fullscreen,
-    file: _flavorHelper.androidV31StylesFile,
-    template: _androidV31StylesXml,
-    android12BackgroundColor: android12BackgroundColor,
-    android12ImagePath: android12ImagePath,
-    android12IconBackgroundColor: android12IconBackgroundColor,
-    android12BrandingImagePath: android12BrandingImagePath,
-  );
+  if (androidV31StylesFile != null) {
+    _applyStylesXml(
+      fullScreen: fullscreen,
+      file: androidV31StylesFile,
+      template: _androidV31StylesXml,
+      android12BackgroundColor: android12BackgroundColor,
+      android12ImagePath: android12ImagePath,
+      android12IconBackgroundColor: android12IconBackgroundColor,
+      android12BrandingImagePath: android12BrandingImagePath,
+    );
+  }
 
-  _applyStylesXml(
-    fullScreen: fullscreen,
-    file: _flavorHelper.androidV31StylesNightFile,
-    template: _androidV31StylesNightXml,
-    android12BackgroundColor: android12DarkBackgroundColor,
-    android12ImagePath: android12DarkImagePath,
-    android12IconBackgroundColor: darkAndroid12IconBackgroundColor,
-    android12BrandingImagePath: android12DarkBrandingImagePath,
-  );
+  if (androidV31NightStylesFile != null) {
+    _applyStylesXml(
+      fullScreen: fullscreen,
+      file: androidV31NightStylesFile,
+      template: _androidV31StylesNightXml,
+      android12BackgroundColor: android12DarkBackgroundColor,
+      android12ImagePath: android12DarkImagePath,
+      android12IconBackgroundColor: darkAndroid12IconBackgroundColor,
+      android12BrandingImagePath: android12DarkBrandingImagePath,
+    );
+  }
 
-  _applyStylesXml(
-    fullScreen: fullscreen,
-    file: _flavorHelper.androidStylesFile,
-    template: _androidStylesXml,
-  );
+  if (androidStylesFile != null) {
+    _applyStylesXml(
+      fullScreen: fullscreen,
+      file: androidStylesFile,
+      template: _androidStylesXml,
+    );
+  }
 
-  _applyStylesXml(
-    fullScreen: fullscreen,
-    file: _flavorHelper.androidNightStylesFile,
-    template: _androidStylesNightXml,
-  );
+  if (androidNightStylesFile != null) {
+    _applyStylesXml(
+      fullScreen: fullscreen,
+      file: androidNightStylesFile,
+      template: _androidStylesNightXml,
+    );
+  }
 
   _applyOrientation(orientation: screenOrientation);
 }
@@ -304,6 +352,7 @@ void _applyLaunchBackgroundXml({
   required String gravity,
   required bool showImage,
   bool showBranding = false,
+  String? brandingBottomPadding,
   String brandingGravity = 'bottom',
 }) {
   String brandingGravityValue = brandingGravity;
@@ -325,8 +374,11 @@ void _applyLaunchBackgroundXml({
 
   if (showBranding && gravity != brandingGravityValue) {
     //add branding when splash image and branding image are not at the same position
+    final androidBrandingItemXml = _androidBrandingItemXml.replaceAll(
+        "{bottom_padding}", brandingBottomPadding ?? "0");
+    print('[Android] branding bottom padding: ${brandingBottomPadding ?? "0"}');
     final brandingItem =
-        XmlDocument.parse(_androidBrandingItemXml).rootElement.copy();
+        XmlDocument.parse(androidBrandingItemXml).rootElement.copy();
     if (brandingGravityValue == 'bottomRight') {
       brandingGravityValue = 'bottom|right';
     } else if (brandingGravityValue == 'bottomLeft') {

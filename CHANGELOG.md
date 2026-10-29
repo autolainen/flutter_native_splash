@@ -1,6 +1,48 @@
+## [2.4.8] - (2026-May-29)
+- Introduce `android_min_sdk` parameter. Thanks [Nico](https://github.com/ThexXTURBOXx) for [PR #820](https://github.com/jonbhanson/flutter_native_splash/pull/820).
+- Remove unnecessary native code. Thanks [Nico](https://github.com/ThexXTURBOXx) for [PR #828](https://github.com/jonbhanson/flutter_native_splash/pull/828).
+- Fix `remove` command always showing help instead of executing. Thanks [ersanKolay](https://github.com/ersanKolay) for [PR #823](https://github.com/jonbhanson/flutter_native_splash/pull/823). Fixes [#822](https://github.com/jonbhanson/flutter_native_splash/issues/822), [#804](https://github.com/jonbhanson/flutter_native_splash/issues/804), [#786](https://github.com/jonbhanson/flutter_native_splash/issues/786).
+- Updated dependencies.
+
+## [2.4.7] - (2025-Oct-16)
+- Updated documentation.  Thanks [Ideeyn](https://github.com/ideeyn) for [PR #806](https://github.com/jonbhanson/flutter_native_splash/pull/806).
+- Specify branding dimensions.  Thanks [Ivan](https://github.com/divan) for the [tip](https://github.com/jonbhanson/flutter_native_splash/issues/729#issuecomment-3172822059).
+- Update dependencies.
+
+## [2.4.6] - (2025-Apr-06)
+
+- Ensure compatibility with Java 21. Thanks [Fichtelcoder](https://github.com/FrankenApps) for [PR #759](https://github.com/jonbhanson/flutter_native_splash/pull/759).
+- Sets Android namespace.  Fixes [#755](https://github.com/jonbhanson/flutter_native_splash/issues/755).
+
+## [2.4.5] - (2025-Feb-16)
+- Updated readme.  Closes [#765](https://github.com/jonbhanson/flutter_native_splash/issues/765).  Thanks [Jason](https://github.com/kingdomseed) for [PR #767](https://github.com/jonbhanson/flutter_native_splash/pull/767).
+- Fixes for Swift Package Manager.  Thanks [Dimas](https://github.com/dinyok) for [PR #762](https://github.com/jonbhanson/flutter_native_splash/pull/762) and [Maarten](https://github.com/lazytesting) for [PR #760](https://github.com/jonbhanson/flutter_native_splash/pull/760).
+- Updated dependencies.
+
+## [2.4.4] - (2024-Dec-29)
+
+- Added the ability to generate all flavors with a single flag. Closes [#751](https://github.com/jonbhanson/flutter_native_splash/issues/751)
+- Update the docs to clarify dark mode parameters.  Closes [#720](https://github.com/jonbhanson/flutter_native_splash/issues/720).
+
+## [2.4.3] - (2024-Nov-17)
+
+- Add Swift Package Manager support.  Closes [#749](https://github.com/jonbhanson/flutter_native_splash/issues/749).
+- Update example to use Kotlin.
+
+## [2.4.2] - (2024-Oct-20)
+
+- Updated dependencies.
+- Clarified documentation.  Closes [#743](https://github.com/jonbhanson/flutter_native_splash/issues/743).
+
+## [2.4.1] - (2024-Jun-07)
+
+- Added support for bottom padding of branding image. Thanks [Mudassir](https://github.com/Lzyct) for [PR #709](https://github.com/jonbhanson/flutter_native_splash/pull/709). Closes [#694](https://github.com/jonbhanson/flutter_native_splash/issues/694).
+- Updated dependencies.
+- Corrected comment in template.  Closes [#705](https://github.com/jonbhanson/flutter_native_splash/issues/705).
+
 ## [2.4.0] - (2024-Mar-17)
 
-- Migrate from  [js](https://pub.dev/packages/js) to [js_interop](https://dart.dev/interop/js-interop). Closes [#676](https://github.com/jonbhanson/flutter_native_splash/issues/676).  Closes [#671](https://github.com/jonbhanson/flutter_native_splash/issues/671).
+- Migrate from [js](https://pub.dev/packages/js) to [js_interop](https://dart.dev/interop/js-interop). Closes [#676](https://github.com/jonbhanson/flutter_native_splash/issues/676). Closes [#671](https://github.com/jonbhanson/flutter_native_splash/issues/671).
 
 ## [2.3.13] - (2024-Feb-18)
 

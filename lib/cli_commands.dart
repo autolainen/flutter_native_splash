@@ -1,7 +1,7 @@
 /// ## Flutter Native Splash
 ///
 /// This is the main entry point for the Flutter Native Splash package.
-library flutter_native_splash_cli;
+library;
 
 import 'dart:isolate';
 
@@ -29,6 +29,7 @@ void createSplash({
   required String? flavor,
 }) {
   if (flavor != null) {
+    // ignore_for_file: avoid_print
     print(
       '''
 ╔════════════════════════════════════════════════════════════════════════════╗
@@ -64,10 +65,16 @@ void _createSplashByConfig(Map<String, dynamic> config) {
       _checkImageExists(config: config, parameter: _Parameter.darkImageWeb);
   final String? brandingImage =
       _checkImageExists(config: config, parameter: _Parameter.brandingImage);
+  final String? brandingBottomPadding =
+      config[_Parameter.brandingBottomPadding]?.toString();
   final String? brandingImageAndroid = _checkImageExists(
       config: config, parameter: _Parameter.brandingImageAndroid);
+  final String? brandingBottomPaddingAndroid =
+      config[_Parameter.brandingBottomPaddingAndroid]?.toString();
   final String? brandingImageIos =
       _checkImageExists(config: config, parameter: _Parameter.brandingImageIos);
+  final String? brandingBottomPaddingIos =
+      config[_Parameter.brandingBottomPaddingIos]?.toString();
   final String? brandingImageWeb =
       _checkImageExists(config: config, parameter: _Parameter.brandingImageWeb);
   final String? brandingDarkImage = _checkImageExists(
@@ -113,6 +120,7 @@ void _createSplashByConfig(Map<String, dynamic> config) {
   }
   final String? androidScreenOrientation =
       config[_Parameter.androidScreenOrientation] as String?;
+  final int? androidMinSdk = config[_Parameter.androidMinSdk] as int?;
   final brandingGravity =
       config[_Parameter.brandingGravity] as String? ?? 'bottom';
   final bool fullscreen = config[_Parameter.fullscreen] as bool? ?? false;
@@ -155,6 +163,8 @@ void _createSplashByConfig(Map<String, dynamic> config) {
         imagePath: imageAndroid ?? image,
         darkImagePath: darkImageAndroid ?? darkImage,
         brandingImagePath: brandingImageAndroid ?? brandingImage,
+        brandingBottomPadding:
+            brandingBottomPaddingAndroid ?? brandingBottomPadding,
         brandingDarkImagePath: brandingDarkImageAndroid ?? brandingDarkImage,
         backgroundImage: backgroundImageAndroid ?? backgroundImage,
         darkBackgroundImage: darkBackgroundImageAndroid ?? darkBackgroundImage,
@@ -164,6 +174,7 @@ void _createSplashByConfig(Map<String, dynamic> config) {
         brandingGravity: brandingGravity,
         fullscreen: fullscreen,
         screenOrientation: androidScreenOrientation,
+        androidMinSdk: androidMinSdk,
         android12ImagePath: android12Image,
         android12DarkImagePath: android12DarkImage ?? android12Image,
         android12BackgroundColor: android12Color,
@@ -189,6 +200,8 @@ void _createSplashByConfig(Map<String, dynamic> config) {
         darkBackgroundImage: darkBackgroundImageIos ?? darkBackgroundImage,
         brandingImagePath: brandingImageIos ?? brandingImage,
         brandingDarkImagePath: brandingDarkImageIos ?? brandingDarkImage,
+        brandingBottomPadding:
+            brandingBottomPaddingIos ?? brandingBottomPadding,
         color: colorIos ?? color,
         darkColor: darkColorIos ?? darkColor,
         plistFiles: plistFiles,
@@ -409,6 +422,7 @@ String? parseColor(dynamic color) {
 class _Parameter {
   static const android = 'android';
   static const android12Section = 'android_12';
+  static const androidMinSdk = 'android_min_sdk';
   static const androidScreenOrientation = 'android_screen_orientation';
   static const backgroundImage = 'background_image';
   static const backgroundImageAndroid = 'background_image_android';
@@ -420,8 +434,11 @@ class _Parameter {
   static const brandingDarkImageWeb = 'branding_dark_web';
   static const brandingGravity = 'branding_mode';
   static const brandingImage = 'branding';
+  static const brandingBottomPadding = 'branding_bottom_padding';
   static const brandingImageAndroid = 'branding_android';
+  static const brandingBottomPaddingAndroid = 'branding_bottom_padding_android';
   static const brandingImageIos = 'branding_ios';
+  static const brandingBottomPaddingIos = 'branding_bottom_padding_ios';
   static const brandingImageWeb = 'branding_web';
   static const color = 'color';
   static const colorAndroid = "color_android";
@@ -456,6 +473,7 @@ class _Parameter {
   static List<String> all = [
     android,
     android12Section,
+    androidMinSdk,
     androidScreenOrientation,
     backgroundImage,
     backgroundImageAndroid,
@@ -467,8 +485,11 @@ class _Parameter {
     brandingDarkImageWeb,
     brandingGravity,
     brandingImage,
+    brandingBottomPadding,
     brandingImageAndroid,
     brandingImageIos,
+    brandingBottomPaddingIos,
+    brandingBottomPaddingAndroid,
     brandingImageWeb,
     color,
     colorAndroid,
